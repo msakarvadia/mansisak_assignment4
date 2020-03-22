@@ -79,9 +79,32 @@ public class SkipList implements SkipList_Interface {
 	@Override
 	public boolean insert(double value) {
 		// TODO Auto-generated method stub
-		if(this.contains(value)) {
+		if (this.contains(value)) {
 			return false;
 		}
+		int levels = 0;
+		while (!this.flip()) {
+			levels++;
+		}
+		SkipList_Node newNode = new SkipList_Node(value, levels);
+		SkipList_Node before_node = root;
+		SkipList_Node after_node;
+		//find the node right before and node right after where we want to insert
+		//TODO: figure out if for loop here is correct
+		for (int i = MAXHEIGHT; i >= 0; i--) {
+			if (before_node.getNext(i).getValue() != Double.NaN) {
+				after_node = before_node.getNext(i);
+				if (after_node.getValue() < value) {
+					before_node = after_node;
+					after_node = after_node.getNext(i);
+				}
+				if (after_node.getValue() > value) {
+					continue;
+				}
+			}
+		}
+		//use the node right before and node right after, to set up appropriate connections:
+		//TODO:
 		size++;
 		return true;
 	}
@@ -89,7 +112,7 @@ public class SkipList implements SkipList_Interface {
 	@Override
 	public boolean remove(double value) {
 		// TODO Auto-generated method stub
-		if(size==0 || !this.contains(value)) {
+		if (size == 0 || !this.contains(value)) {
 			return false;
 		}
 		size--;
@@ -105,7 +128,7 @@ public class SkipList implements SkipList_Interface {
 	@Override
 	public double findMin() {
 		// TODO Auto-generated method stub
-		if(size == 0) {
+		if (size == 0) {
 			return Double.NaN;
 		}
 		return 0;
@@ -114,7 +137,7 @@ public class SkipList implements SkipList_Interface {
 	@Override
 	public double findMax() {
 		// TODO Auto-generated method stub
-		if(size == 0) {
+		if (size == 0) {
 			return Double.NaN;
 		}
 		return 0;
@@ -122,7 +145,7 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public boolean empty() {
-		if(size==0) {
+		if (size == 0) {
 			return true;
 		}
 		return false;
@@ -132,7 +155,7 @@ public class SkipList implements SkipList_Interface {
 	public void clear() {
 		// TODO Auto-generated method stub
 		size = 0;
-		//TODO reset sentinel node to original value
+		// TODO reset sentinel node to original value
 	}
 
 	@Override
@@ -143,10 +166,10 @@ public class SkipList implements SkipList_Interface {
 	@Override
 	public int level() {
 		// TODO Auto-generated method stub
-		if(size == 0) {
+		if (size == 0) {
 			return -1;
 		}
-		//TODO rest of the function
+		// TODO rest of the function
 		return 0;
 	}
 
@@ -155,6 +178,5 @@ public class SkipList implements SkipList_Interface {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 
 }
