@@ -88,7 +88,7 @@ public class SkipList implements SkipList_Interface {
 		}
 		SkipList_Node newNode = new SkipList_Node(value, levels);
 		SkipList_Node before_node = root;
-		SkipList_Node after_node;
+		SkipList_Node after_node = new SkipList_Node(Double.NaN,MAXHEIGHT);
 		//find the node right before and node right after where we want to insert
 		//TODO: figure out if for loop here is correct
 		for (int i = MAXHEIGHT; i >= 0; i--) {
@@ -105,6 +105,24 @@ public class SkipList implements SkipList_Interface {
 		}
 		//use the node right before and node right after, to set up appropriate connections:
 		//TODO:
+		before_node.setNext(0,newNode);
+		newNode.setNext(0,after_node);
+		for(int i = 1; i <levels; i++) {
+			//start from root or something, use while loop to get next, as long as next is less than val
+			SkipList_Node front = root.getNext(i);
+			while(front.getNext(i).getValue()<value) {
+			front= front.getNext(i);
+			}
+			before_node.setNext(i,newNode);
+			//Figure out someway to deal with afternode
+			if(after_node.getHeight()<=i) {
+				newNode.setNext(i, after_node);
+			}
+			else {
+				after_node = after_node.getNext(i);
+				newNode.setNext(i, after_node);
+			}
+		}
 		size++;
 		return true;
 	}

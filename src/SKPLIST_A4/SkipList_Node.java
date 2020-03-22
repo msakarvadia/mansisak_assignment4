@@ -18,7 +18,7 @@ public class SkipList_Node {
   public SkipList_Node[] getNext() { return next; }
   public SkipList_Node getNext(int level) { return next[level]; }
   public String toString() { return "" + value; }
-
+  public int getHeight() {return level;}
   // --------------------------------------------------------------------
   // you may add any other methods you want to get the job done
   // --------------------------------------------------------------------
