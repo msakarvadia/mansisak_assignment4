@@ -47,6 +47,8 @@ public class SkipList implements SkipList_Interface {
 		for (levels = 0; levels < root.getNext().length && root.getNext(levels) != null; levels++)
 			;
 
+		//System.out.println(levels);
+		
 		StringBuilder[] sbs = new StringBuilder[levels];
 
 		for (int i = 0; i < sbs.length; i++) {
@@ -65,6 +67,7 @@ public class SkipList implements SkipList_Interface {
 				if (cur.getNext(i) == null) {
 					levels--;
 				}
+				System.out.println(sbs[i]);
 				sbs[i].append("\t").append(cur.getValue());
 			}
 		}
@@ -82,17 +85,18 @@ public class SkipList implements SkipList_Interface {
 		if (this.contains(value)) {
 			return false;
 		}
-		int levels = 0;
+		int levels = 1;
 		while (!this.flip()) {
 			levels++;
 		}
 		SkipList_Node newNode = new SkipList_Node(value, levels);
 		SkipList_Node before_node = root;
-		SkipList_Node after_node = new SkipList_Node(Double.NaN,MAXHEIGHT);
+		SkipList_Node after_node = new SkipList_Node(Double.NaN,root.getHeight());
 		//find the node right before and node right after where we want to insert
 		//TODO: figure out if for loop here is correct
-		for (int i = MAXHEIGHT; i >= 0; i--) {
-			if (before_node.getNext(i).getValue() != Double.NaN) {
+		for (int i = root.getHeight()-1; i >= 0; i--) {
+			//System.out.println(root.getNext()[6]);
+			if (before_node.getNext(i) != null) {
 				after_node = before_node.getNext(i);
 				if (after_node.getValue() < value) {
 					before_node = after_node;
@@ -105,15 +109,18 @@ public class SkipList implements SkipList_Interface {
 		}
 		//use the node right before and node right after, to set up appropriate connections:
 		//TODO:
+		//System.out.println(before_node.getNext()[0]);
 		before_node.setNext(0,newNode);
+		//System.out.println(before_node.getNext()[1]);
 		newNode.setNext(0,after_node);
 		for(int i = 1; i <levels; i++) {
 			//start from root or something, use while loop to get next, as long as next is less than val
-			SkipList_Node front = root.getNext(i);
-			while(front.getNext(i).getValue()<value) {
+			SkipList_Node front = root;
+			//System.out.println("hi");
+			while(front.getNext(i)!=null && front.getNext(i).getValue()<value) {
 			front= front.getNext(i);
 			}
-			before_node.setNext(i,newNode);
+			front.setNext(i,newNode);
 			//Figure out someway to deal with afternode
 			if(after_node.getHeight()<=i) {
 				newNode.setNext(i, after_node);
