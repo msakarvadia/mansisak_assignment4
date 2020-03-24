@@ -150,7 +150,6 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public double findMax() {
-		// TODO Auto-generated method stub
 		if (size == 0) {
 			return Double.NaN;
 		}
@@ -193,9 +192,7 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public int max() {
-		// TODO Auto-generated method stub
-		
-		return 0;
+		return root.getHeight();
 	}
 
 }
