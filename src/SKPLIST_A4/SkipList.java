@@ -119,7 +119,6 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public boolean contains(double value) {
-		// TODO Auto-generated method stub
 		SkipList_Node front = root;
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
 			if(front.getNext(i)!=null && front.getNext(i).getValue()==value) {
@@ -142,7 +141,6 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public double findMin() {
-		// TODO Auto-generated method stub
 		if (size == 0) {
 			return Double.NaN;
 		}
@@ -156,7 +154,11 @@ public class SkipList implements SkipList_Interface {
 		if (size == 0) {
 			return Double.NaN;
 		}
-		return 0;
+		SkipList_Node cur = root.getNext(0);
+		while(cur.getNext(0)!=null) {
+			cur = cur.getNext(0);
+		}
+		return cur.getValue();
 	}
 
 	@Override
@@ -192,6 +194,7 @@ public class SkipList implements SkipList_Interface {
 	@Override
 	public int max() {
 		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
