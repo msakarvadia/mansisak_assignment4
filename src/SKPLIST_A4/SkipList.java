@@ -57,7 +57,6 @@ public class SkipList implements SkipList_Interface {
 		}
 
 		SkipList_Node cur = root;
-		// System.out.println(root.getNext(0).getValue());
 
 		while (cur.getNext(0) != null) {
 			cur = cur.getNext(0);
@@ -73,7 +72,6 @@ public class SkipList implements SkipList_Interface {
 				sbs[i].append("\t").append(cur.getValue());
 			}
 		}
-
 		for (int i = sbs.length - 1; i >= 0; i--) {
 			sb.append(sbs[i]).append("\n");
 		}
@@ -82,7 +80,7 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public boolean insert(double value) {
-		// TODO Auto-generated method stub
+		// TODO CHECK
 		if (this.contains(value)) {
 			return false;
 		}
@@ -90,12 +88,13 @@ public class SkipList implements SkipList_Interface {
 		while (!this.flip()) {
 			levels++;
 		}
+		levels = levels % root.getHeight();
 		SkipList_Node newNode = new SkipList_Node(value, levels);
 		SkipList_Node front = root;
-
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
-			//System.out.println(front.getNext(i));
-			if ((front.getNext(i) != null) && front.getNext(i).getValue() < value) {
+			while ((front.getNext(i) != null) && front.getNext(i).getValue() < value) {
+				//System.out.println("Value: "+value);
+				//System.out.println("front val: "+ front.getNext(i).getValue());
 				front = front.getNext(i);
 			}
 			if (i < levels) {
