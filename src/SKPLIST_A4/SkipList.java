@@ -80,7 +80,6 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public boolean insert(double value) {
-		// TODO CHECK
 		if (this.contains(value)) {
 			return false;
 		}
@@ -170,9 +169,10 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
 		size = 0;
-		// TODO reset sentinel node to original value
+		for (int i = root.getHeight() - 1; i >= 0; i--) {
+			root.setNext(i, null);
+		}
 	}
 
 	@Override

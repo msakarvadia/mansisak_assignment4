@@ -62,6 +62,8 @@ public class SkipList_Playground {
     }
     System.out.println("Min: "+list.findMin());
     System.out.println("Max: "+list.findMax());
+    list.clear();
+    System.out.println(list);
 //    System.out.println(list);
   }
 }
