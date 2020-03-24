@@ -146,7 +146,8 @@ public class SkipList implements SkipList_Interface {
 		if (size == 0) {
 			return Double.NaN;
 		}
-		return 0;
+		
+		return root.getNext(0).getValue();
 	}
 
 	@Override
