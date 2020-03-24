@@ -108,9 +108,20 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public boolean remove(double value) {
-		// TODO Auto-generated method stub
 		if (size == 0 || !this.contains(value)) {
 			return false;
+		}
+		SkipList_Node front = root;
+		for (int i = root.getHeight() - 1; i >= 0; i--) {
+			while ((front.getNext(i) != null) && front.getNext(i).getValue() < value) {
+				//System.out.println("Value: "+value);
+				//System.out.println("front val: "+ front.getNext(i).getValue());
+				front = front.getNext(i);
+			}
+			if(front.getNext(i)!=null && front.getNext(i).getValue()==value) {
+				front.setNext(i, front.getNext(i).getNext(i));
+			}
+		
 		}
 		size--;
 		return true;
@@ -120,10 +131,6 @@ public class SkipList implements SkipList_Interface {
 	public boolean contains(double value) {
 		SkipList_Node front = root;
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
-			if(front.getNext(i)!=null && front.getNext(i).getValue()==value) {
-				//System.out.println("contains: "+ value);
-				return true;
-			}
 			while ((front.getNext(i) != null) && front.getNext(i).getValue() < value) {
 				//System.out.println("Value: "+value);
 				//System.out.println("front val: "+ front.getNext(i).getValue());
