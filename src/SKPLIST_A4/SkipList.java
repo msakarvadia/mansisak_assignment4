@@ -182,11 +182,15 @@ public class SkipList implements SkipList_Interface {
 
 	@Override
 	public int level() {
-		// TODO Auto-generated method stub
 		if (size == 0) {
 			return -1;
 		}
-		// TODO rest of the function
+
+		for (int i = root.getHeight() - 1; i >= 0; i--) {
+			if(root.getNext(i)!=null) {
+				return (i+1);
+			}
+		}
 		return 0;
 	}
 
