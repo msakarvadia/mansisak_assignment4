@@ -34,6 +34,7 @@ public class SkipList_Playground {
       list.insert(i);
       System.out.println(list);
     }
+    //list.insert(1);
 //    System.out.println(list);
 //    System.out.println("=== CONTAINS ===");
 //    for(double i = -5; i < 15; i ++) {
@@ -51,11 +52,14 @@ public class SkipList_Playground {
 //    for(double i = -5; i < 15; i ++) {
 //      System.out.println(i + ": " + list.contains(i));
 //    }
+ * 
+ */
+ 
     System.out.println("=== INSERT ===");
     for(double i = 0; i < 10; i ++) {
       list.insert(i);
       System.out.println(list);
-    }*/
+    }
 //    System.out.println(list);
   }
 }
