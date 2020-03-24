@@ -57,16 +57,20 @@ public class SkipList implements SkipList_Interface {
 		}
 
 		SkipList_Node cur = root;
-
+		//System.out.println(root.getNext(0).getValue());
+		
 		while (cur.getNext(0) != null) {
 			cur = cur.getNext(0);
+			
 			for (int i = levels - 1; i >= cur.getNext().length; i--) {
 				sbs[i].append("\t");
 			}
 			for (int i = cur.getNext().length - 1; i >= 0; i--) {
+				
 				if (cur.getNext(i) == null) {
 					levels--;
 				}
+				System.out.println("print i: "+i);
 				System.out.println(sbs[i]);
 				sbs[i].append("\t").append(cur.getValue());
 			}
@@ -75,7 +79,7 @@ public class SkipList implements SkipList_Interface {
 		for (int i = sbs.length - 1; i >= 0; i--) {
 			sb.append(sbs[i]).append("\n");
 		}
-
+		//System.out.println(sb);
 		return sb.toString();
 	}
 
@@ -111,7 +115,7 @@ public class SkipList implements SkipList_Interface {
 		//TODO:
 		//System.out.println(before_node.getNext()[0]);
 		before_node.setNext(0,newNode);
-		//System.out.println(before_node.getNext()[1]);
+		//System.out.println(levels);
 		newNode.setNext(0,after_node);
 		for(int i = 1; i <levels; i++) {
 			//start from root or something, use while loop to get next, as long as next is less than val
@@ -122,7 +126,10 @@ public class SkipList implements SkipList_Interface {
 			}
 			front.setNext(i,newNode);
 			//Figure out someway to deal with afternode
-			if(after_node.getHeight()<=i) {
+			if(after_node == null) {
+				newNode.setNext(i, null);
+			}
+			else if(after_node.getHeight()<=i) {
 				newNode.setNext(i, after_node);
 			}
 			else {
