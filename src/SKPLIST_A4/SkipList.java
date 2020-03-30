@@ -84,7 +84,7 @@ public class SkipList implements SkipList_Interface {
 			return false;
 		}
 		int levels = 1;
-		while (!this.flip()) {
+		while (this.flip()) {
 			levels++;
 		}
 		levels = levels % root.getHeight();
@@ -195,7 +195,7 @@ public class SkipList implements SkipList_Interface {
 
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
 			if(root.getNext(i)!=null) {
-				return (i+1);
+				return (i);
 			}
 		}
 		return 0;
