@@ -6,6 +6,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/mansi/Desktop/Programming/Comp410- Tests/A4_oracle.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
