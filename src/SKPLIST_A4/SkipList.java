@@ -47,20 +47,15 @@ public class SkipList implements SkipList_Interface {
 		for (levels = 0; levels < root.getNext().length && root.getNext(levels) != null; levels++)
 			;
 
-		// System.out.println(levels);
-
+		// System.out.println(levels)
 		StringBuilder[] sbs = new StringBuilder[levels];
-
 		for (int i = 0; i < sbs.length; i++) {
 			sbs[i] = new StringBuilder();
 			sbs[i].append("level ").append(i).append(":");
 		}
-
 		SkipList_Node cur = root;
-
 		while (cur.getNext(0) != null) {
 			cur = cur.getNext(0);
-
 			for (int i = levels - 1; i >= cur.getNext().length; i--) {
 				sbs[i].append("\t");
 			}
@@ -121,7 +116,6 @@ public class SkipList implements SkipList_Interface {
 			if (front.getNext(i) != null && front.getNext(i).getValue() == value) {
 				front.setNext(i, front.getNext(i).getNext(i));
 			}
-
 		}
 		size--;
 		return true;
@@ -140,7 +134,6 @@ public class SkipList implements SkipList_Interface {
 				// System.out.println("contains: "+ value);
 				return true;
 			}
-
 		}
 		return false;
 	}
@@ -150,7 +143,6 @@ public class SkipList implements SkipList_Interface {
 		if (size == 0) {
 			return Double.NaN;
 		}
-
 		return root.getNext(0).getValue();
 	}
 
@@ -192,7 +184,6 @@ public class SkipList implements SkipList_Interface {
 		if (size == 0) {
 			return -1;
 		}
-
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
 			if (root.getNext(i) != null) {
 				return (i);
