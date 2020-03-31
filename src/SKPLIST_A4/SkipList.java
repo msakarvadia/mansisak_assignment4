@@ -92,8 +92,8 @@ public class SkipList implements SkipList_Interface {
 		SkipList_Node front = root;
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
 			while ((front.getNext(i) != null) && front.getNext(i).getValue() < value) {
-				//System.out.println("Value: "+value);
-				//System.out.println("front val: "+ front.getNext(i).getValue());
+				// System.out.println("Value: "+value);
+				// System.out.println("front val: "+ front.getNext(i).getValue());
 				front = front.getNext(i);
 			}
 			if (i < levels) {
@@ -114,14 +114,14 @@ public class SkipList implements SkipList_Interface {
 		SkipList_Node front = root;
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
 			while ((front.getNext(i) != null) && front.getNext(i).getValue() < value) {
-				//System.out.println("Value: "+value);
-				//System.out.println("front val: "+ front.getNext(i).getValue());
+				// System.out.println("Value: "+value);
+				// System.out.println("front val: "+ front.getNext(i).getValue());
 				front = front.getNext(i);
 			}
-			if(front.getNext(i)!=null && front.getNext(i).getValue()==value) {
+			if (front.getNext(i) != null && front.getNext(i).getValue() == value) {
 				front.setNext(i, front.getNext(i).getNext(i));
 			}
-		
+
 		}
 		size--;
 		return true;
@@ -132,15 +132,15 @@ public class SkipList implements SkipList_Interface {
 		SkipList_Node front = root;
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
 			while ((front.getNext(i) != null) && front.getNext(i).getValue() < value) {
-				//System.out.println("Value: "+value);
-				//System.out.println("front val: "+ front.getNext(i).getValue());
+				// System.out.println("Value: "+value);
+				// System.out.println("front val: "+ front.getNext(i).getValue());
 				front = front.getNext(i);
 			}
-			if(front.getNext(i)!=null && front.getNext(i).getValue()==value) {
-				//System.out.println("contains: "+ value);
+			if (front.getNext(i) != null && front.getNext(i).getValue() == value) {
+				// System.out.println("contains: "+ value);
 				return true;
 			}
-		
+
 		}
 		return false;
 	}
@@ -150,7 +150,7 @@ public class SkipList implements SkipList_Interface {
 		if (size == 0) {
 			return Double.NaN;
 		}
-		
+
 		return root.getNext(0).getValue();
 	}
 
@@ -160,7 +160,7 @@ public class SkipList implements SkipList_Interface {
 			return Double.NaN;
 		}
 		SkipList_Node cur = root.getNext(0);
-		while(cur.getNext(0)!=null) {
+		while (cur.getNext(0) != null) {
 			cur = cur.getNext(0);
 		}
 		return cur.getValue();
@@ -194,7 +194,7 @@ public class SkipList implements SkipList_Interface {
 		}
 
 		for (int i = root.getHeight() - 1; i >= 0; i--) {
-			if(root.getNext(i)!=null) {
+			if (root.getNext(i) != null) {
 				return (i);
 			}
 		}
